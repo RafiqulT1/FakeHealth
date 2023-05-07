@@ -15,7 +15,7 @@ def distribution_curve(data, max_value=20, label=None):
     '''
     Draw and plot distribution curve of data.
     '''
-    density = stats.kde.gaussian_kde(data)
+    density = stats.gaussian_kde(data)
     x = np.arange(0., max_value, .1)
     plt.plot(x, density(x), label=label)
 
