@@ -1,4 +1,4 @@
-# power law distribution made with https://www.youtube.com/watch?v=yjeMEuK6hik&t=4s&ab_channel=PhysicsWithNero
+
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import stats
@@ -29,15 +29,17 @@ hist1 = plt.hist(data, color='lightgreen', ec='black', bins=10, label="data")
 # Make distribution curve 2
 #distribution_curve(data2, label="data2")
 
-hist1_x = hist1[1]
-hist1_y = hist1[0]
-print(hist1_x)
-print(hist1_y)
-
 plt.legend() # add labels
 plt.show()
 plt.clf()
 
+# # #
+# power law distribution made with https://www.youtube.com/watch?v=yjeMEuK6hik&t=4s&ab_channel=PhysicsWithNero
+
+hist1_x = hist1[1]
+hist1_y = hist1[0]
+print(hist1_x)
+print(hist1_y)
 
 plt.plot(hist1_x[:-1], hist1_y, "r.")
 
