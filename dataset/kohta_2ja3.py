@@ -6,6 +6,7 @@ import numpy as np
 from scipy import stats
 
 
+
 followers_folder = "user_network\\user_followers"
 following_folder = "user_network\\user_following"
 follower_user_ids = os.listdir(followers_folder)
@@ -133,13 +134,13 @@ plt.show()
 # 2. Followings
 # Create histograms
 plt.hist(trusted_following, color='lightblue', ec='black', bins=20, label="followings of trusted")
-plt.xlabel("follower count")
+plt.xlabel("following count")
 plt.ylabel("number of users")
 plt.legend()
 plt.show()
 
 plt.hist(untrusted_following, color='orange', ec='black', bins=20, label="followings of untrusted")
-plt.xlabel("follower count")
+plt.xlabel("following count")
 plt.ylabel("number of users")
 plt.legend()
 plt.show()
@@ -149,6 +150,6 @@ plt.show()
 distribution_curve(trusted_following, max_value=5000, label="followings of trusted")
 # Make distribution curve 2
 distribution_curve(untrusted_following, max_value=5000, label="followings of untrusted")
-plt.xlabel("follower count")
+plt.xlabel("following count")
 plt.legend()
 plt.show()
