@@ -93,7 +93,7 @@ def distribution_curve(data, max_value=20, label=None):
     Draw and plot distribution curve of data.
     '''
     density = stats.gaussian_kde(data)
-    x = np.arange(0., max_value, .1)
+    x = np.arange(0., max_value, 1)
     plt.plot(x, density(x), label=label)
 
 trusted_followers = []
@@ -111,13 +111,13 @@ for value in untrusted_information:
 
 # 1. Followers
 # Create histograms
-plt.hist(trusted_followers, color='lightblue', ec='black', bins=20, label="followers of trusted")
+hist_trusted = plt.hist(trusted_followers, color='lightblue', ec='black', bins=20, label="followers of trusted")
 plt.xlabel("follower count")
 plt.ylabel("number of users")
 plt.legend()
 plt.show()
 
-plt.hist(untrusted_followers, color='orange', ec='black', bins=20, label="followers of untrusted")
+hist_untrusted = plt.hist(untrusted_followers, color='orange', ec='black', bins=20, label="followers of untrusted")
 plt.xlabel("follower count")
 plt.ylabel("number of users")
 plt.legend()
@@ -131,15 +131,21 @@ plt.xlabel("follower count")
 plt.legend()
 plt.show()
 
+# Alternative way to make distribution curves
+# plt.plot(hist_trusted[1][:-1], hist_trusted[0], color='lightblue')
+# plt.plot(hist_untrusted[1][:-1], hist_untrusted[0], color="orange")
+# plt.show()
+
+
 # 2. Followings
 # Create histograms
-plt.hist(trusted_following, color='lightblue', ec='black', bins=20, label="followings of trusted")
+hist_trusted = plt.hist(trusted_following, color='lightblue', ec='black', bins=20, label="followings of trusted")
 plt.xlabel("following count")
 plt.ylabel("number of users")
 plt.legend()
 plt.show()
 
-plt.hist(untrusted_following, color='orange', ec='black', bins=20, label="followings of untrusted")
+hist_untrusted = plt.hist(untrusted_following, color='orange', ec='black', bins=20, label="followings of untrusted")
 plt.xlabel("following count")
 plt.ylabel("number of users")
 plt.legend()
@@ -153,3 +159,8 @@ distribution_curve(untrusted_following, max_value=5000, label="followings of unt
 plt.xlabel("following count")
 plt.legend()
 plt.show()
+
+# Alternative way to make distribution curves
+# plt.plot(hist_trusted[1][:-1], hist_trusted[0], color='lightblue')
+# plt.plot(hist_untrusted[1][:-1], hist_untrusted[0], color="orange")
+# plt.show()

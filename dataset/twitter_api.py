@@ -18,9 +18,9 @@ def try_user_scrap():
     st.GetUsersRunner(get_user_task=user_task, raw_data_outputs=[output_print, output_json]).run()
 
 
-def try_tweet_by_id_scrap():
-    id_task = st.TweetsByIdTask('1081498079432507393')
-    output_json = st.JsonLineFileRawOutput('output_raw_id.jl')
+def try_tweet_by_id_scrap(tweet_id, output_file_name):
+    id_task = st.TweetsByIdTask(tweet_id)
+    output_json = st.JsonLineFileRawOutput(output_file_name)
     output_print = st.PrintRawOutput()
     st.TweetsByIdRunner(tweets_by_id_task=id_task,
                         raw_data_outputs=[output_print, output_json]).run()
