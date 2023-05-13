@@ -60,13 +60,13 @@ for news in untrusted_news:
         untrusted_tuples.append([news, user_id])
 
 
-# make the Fake tweets file
+# make the Fake tweets file (you don't have to do this if you already have "Fake_output_raw_id.jl")
 # for i in range(len(untrusted_tuples)):
 #     twitter_api.try_tweet_by_id_scrap(untrusted_tuples[i][1], "Fake_output_raw_id.jl")
 
-# make the Real tweets file
-for i in range(len(trusted_tuples)):
-    twitter_api.try_tweet_by_id_scrap(trusted_tuples[i][1], "Real_output_raw_id.jl")
+# make the Real tweets file (you don't have to do this if you already have "Real_output_raw_id.jl")
+# for i in range(len(trusted_tuples)):
+#     twitter_api.try_tweet_by_id_scrap(trusted_tuples[i][1], "Real_output_raw_id.jl")
 
 # put followers and followees to their lists
 trusted_followers = []
@@ -94,62 +94,25 @@ with open('Real_output_raw_id.jl', 'r') as file:
             if '"followers_count":' in thing:
                 trusted_followers.append(int(thing[18:]))
             if '"friends_count":' in thing:
-                trusted_followees.append(thing[16:])
+                trusted_followees.append(int(thing[16:]))
                 break
         things = []
 
-print(f"length of trusted tuples: {len(trusted_tuples)}")
-print(f"length of trusted followers: {len(trusted_followers)}")
-print(f"length of trusted followees: {len(trusted_followees)}")
-print()
-print(f"length of untrusted tuples: {len(untrusted_tuples)}")
-print(f"length of untrusted followers: {len(untrusted_followers)}")
-print(f"length of untrusted followees: {len(untrusted_followees)}")
 
-# print(f"untrusted_followers: {untrusted_followers}")
-# for follower in untrusted_followers:
-#     print(follower)
-        # if ', "followers_count":' in line:
-        #    print(line["followers_count"]) 
-        # if ', "friends_count":' in line:
-        #     print(line["friends_count"])
+# finalize the untrusted_tuples
+for i in range(len(untrusted_followers)):
+    untrusted_tuples[i].append(untrusted_followers[i])
+    untrusted_tuples[i].append(untrusted_followees[i])
 
+# remove the last tuple in untrusted_tuples because...
+untrusted_tuples.remove(untrusted_tuples[-1])
 
+# finalize the trusted_tuples
+for i in range(len(trusted_followers)):
+    trusted_tuples[i].append(trusted_followers[i])
+    trusted_tuples[i].append(trusted_followees[i])
 
-# for tweet in df2['tweets']:
-    # trusted_tuples.append(tweet[0])
-
-# print(user_ids[3])
-# for i, news in enumerate(trusted_news):
-#     trusted_tuples.append((news, follower_user_ids[i]))
-# for i, news in enumerate(untrusted_news):
-#     untrusted_tuples.append((news, follower_user_ids[i + 1217]))
-
-
-# # TODO: retrieve the number of followers and followees for each id in trusted and untrusted
-# trusted_information = []
-# untrusted_information = []
-
-# # fill the trusted information list
-# for i in range(len(trusted_news)):
-#     # make a dataframe for the followers and following json files
-#     followers_df = pd.read_json(f'user_network\\user_followers\\{follower_user_ids[i]}', orient='columns')
-#     following_df = pd.read_json(f'user_network\\user_following\\{following_user_ids[i]}', orient='columns')
-#     # append the data to the list
-#     trusted_information.append((trusted_tuples[i][0], trusted_tuples[i][1][:-5], followers_df['ids'].count(), following_df['ids'].count()))
-# # fill the untrusted information list
-# for i in range(len(untrusted_news)):
-#     followers_df = pd.read_json(f'user_network\\user_followers\\{follower_user_ids[i]}', orient='columns')
-#     following_df = pd.read_json(f'user_network\\user_following\\{following_user_ids[i]}', orient='columns')
-#     # append the data to the list
-#     untrusted_information.append((untrusted_tuples[i][0], untrusted_tuples[i][1][:-5], followers_df['ids'].count(), following_df['ids'].count()))
-
-
-# for info in trusted_information:
-#     print(info)
-# print("================================================")
-# for info in untrusted_information:
-#     print(info)
-
-# print(f"trusted_information pituus: {len(trusted_information)}")
-# print(f"untrusted_information pituus: {len(untrusted_information)}")
+"""
+All the data is in the trusted_tuples and untrusted_tuples lists as lists.
+Both lists contain the [news_id, tweet_id, followers, followign] for each news/tweet.
+"""
